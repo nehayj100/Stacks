@@ -10,34 +10,25 @@ class Node:
  
 class Stack:
     def __init__(self):
-        self.a_stack = None
+        self.head = None
         
     def push(self, data):
         new_node = Node(data)
-        curr = self.a_stack
-        if curr is None:
-            curr = new_node
+        if self.head is None:
+            self.head = new_node
         else:
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = new_node
+            new_node.next = self.head
+            self.head = new_node
+      
 
     def pop(self):
-        prev, curr = None, self.a_stack
-        if curr is None:
+        if self.head is None:
             return None
-        while curr.next is not None:
-            prev = curr
-            curr = curr.next
-        # handle case of only one node
-        if prev is None:
-            self.a_stack = None
-            return curr.data
-
-        element = curr.data
-        prev.next = None
-        return element
-
+        else:
+            popped = self.head.data
+            self.head = self.head.next
+            return popped
+            
 a_stack = Stack()
 while True:
     #Give input as string if getting an EOF error. Give input like "push 10" or "pop"
